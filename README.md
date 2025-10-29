@@ -1,7 +1,14 @@
 <div align="center">
-  <img src="https://img.icons8.com/color/144/000000/python.png" alt="Python Logo" width="100"/>
-  <h1>Python Problem-Solving Showcase</h1>
-  <p>A curated collection of Python scripts demonstrating solutions to a variety of programming challenges, from algorithms and data structures to number theory and recursion.</p>
+  <img src="https://img.icons8.com/color/144/000000/python.png" alt="Python Logo" width="128"/>
+  <br>
+  <h1 style="font-weight: bold;">Python Problem-Solving</h1>
+  <p>
+    <em>
+      A curated collection of Python scripts demonstrating solutions to a variety of programming challenges,
+      <br>
+      from algorithms and data structures to number theory and recursion.
+    </em>
+  </p>
   <br>
 </div>
 
@@ -10,6 +17,8 @@
 ## 🗂️ Code Directory
 
 Click on any category to expand and see the related files.
+
+<br>
 
 <details>
 <summary><strong>🧩 HackerRank & Algorithm Challenges</strong></summary>
@@ -56,24 +65,31 @@ Implementations of the sliding window algorithm for various fixed and variable-s
 </details>
 
 <details>
-<summary><strong>🔄 Recursion Deep Dive</strong></summary>
+<summary><strong>🌀 Recursion Deep Dive</strong></summary>
 <br>
-Exploring recursive thinking to solve problems, especially with lists and strings.
+Exploring recursive thinking to solve problems, especially with lists, strings, and combinatorial generation.
 
-* `listInsert.py`: Insert an element into a sorted list recursively.
-* `listSortRec.py`: Sort a list using recursion (Insertion Sort logic).
-* `listRec.py`: Insert an element at the bottom of a list (stack) recursively.
-* `listDelFirst.py`: Delete the first (bottom) element of a list (stack) recursively.
-* `recursion4.py`: Insert an element into a sorted list recursively.
-* `recursion5.py`: Insert an element at a specific position recursively.
-* `recursion6.py`: Delete an element from a specific position recursively.
-* `allSubStr.py`: Generate all subsequences of a string (string concatenation).
-* `allSubs.py`: Generate all subsequences of a string (list-based).
-* `subIndex.py`: Generate all subsequences (index-based approach).
-* `subLsIndex.py`: Generate all subsequences (list and index-based).
-* `recursion1.py`: Example of a recursive function.
-* `recursion2.py`: Example of a recursive function with complex flow.
-* `recursion3.py`: Recursive power function.
+* **List / Stack Manipulation:**
+    * `listInsert.py`: Insert an element into a sorted list recursively.
+    * `listSortRec.py`: Sort a list using recursion (Insertion Sort logic).
+    * `listRec.py`: Insert an element at the bottom of a list (stack) recursively.
+    * `listDelFirst.py`: Delete the first (bottom) element of a list (stack) recursively.
+    * `recursion4.py`: Insert an element into a sorted list recursively.
+    * `recursion5.py`: Insert an element at a specific position recursively.
+    * `recursion6.py`: Delete an element from a specific position recursively.
+* **Combinatorial Generation:**
+    * `allSubStr.py`: Generate all subsequences (string concatenation).
+    * `allSubs.py`: Generate all subsequences (list-based).
+    * `subIndex.py`: Generate all subsequences (index-based).
+    * `subLsIndex.py`: Generate all subsequences (list and index-based).
+    * `subStrCases.py`: Generate subsequences with case permutations.
+    * `subStrHyphen.py`: Generate subsequences with hyphens.
+    * `balancedParantheses.py`: Generate all valid balanced parentheses.
+    * `oneGzero.py`: Generate binary strings with more 1s than 0s.
+* **General Examples:**
+    * `recursion1.py`: Example of a recursive function.
+    * `recursion2.py`: Example of a recursive function with complex flow.
+    * `recursion3.py`: Recursive power function.
 </details>
 
 <details>
