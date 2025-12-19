@@ -41,30 +41,20 @@ int insertNode(BSTNode* &root, int val){
     return 0;
 }   
 
-vector<int> levelOrderReverse(BSTNode* root){
-    vector<int> result;
-    if(root == nullptr) return result;
-    queue<BSTNode*> q;
-    q.push(root);
-    while(!q.empty()){
-        int levelSize = q.size();
-        vector<int> level;
-        for(int i = 0; i < levelSize; ++i){
-            BSTNode* temp = q.front(); q.pop();
-            level.push_back(temp->data);
-            if(temp->left) q.push(temp->left);
-            if(temp->right) q.push(temp->right);
-        }
-        reverse(level.begin(), level.end()); 
-        static bool flag = true;
-        if(flag){
-            result.insert(result.end(), level.rbegin(), level.rend());
-        } else {
-            result.insert(result.end(), level.begin(), level.end());
-        }
-        flag = !flag;
+vector<int> getLeafNodes(BSTNode* root) {
+    vector<int> leafNodes;
+    if (root == nullptr) {
+        return leafNodes;
     }
-    return result;
+    if (root->left == nullptr && root->right == nullptr) {
+        leafNodes.push_back(root->data);
+        return leafNodes;
+    }
+    vector<int> leftLeaves = getLeafNodes(root->left);
+    leafNodes.insert(leafNodes.end(), leftLeaves.begin(), leftLeaves.end());
+    vector<int> rightLeaves = getLeafNodes(root->right);
+    leafNodes.insert(leafNodes.end(), rightLeaves.begin(), rightLeaves.end());
+    return leafNodes;
 }
 
 int main(){
@@ -77,11 +67,12 @@ int main(){
     insertNode(root, 6);
     insertNode(root, 7);
     insertNode(root, 8);
-    cout << "Level Order Reverse Traversal: ";
-    vector<int> res = levelOrderReverse(root);
-    for(size_t i = 0; i < res.size(); ++i){
-        if(i) cout << ",";
-        cout << res[i];
+    cout << "Leaf Nodes: ";
+    vector<int> leafNodes = getLeafNodes(root);
+    for(int i = 0; i < leafNodes.size(); ++i){
+        if(i) 
+        cout << ", ";
+        cout << leafNodes[i];
     }
     cout << endl;
     return 0;
