@@ -143,6 +143,13 @@ vector<vector<int>> level_order(Node* root) {
     return r;
 }
 
+void inordersucc(Node* root, vector<int>& res) {
+    if (root == nullptr) return;
+    inordersucc(root->left, res);
+    res.push_back(root->data);
+    inordersucc(root->right, res);
+}
+
 int main() {
     Node* root = nullptr;
     vector<int> data_to_insert = {50, 30, 20, 40, 70, 60, 80};
