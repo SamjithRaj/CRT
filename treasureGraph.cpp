@@ -4,23 +4,23 @@ using namespace std;
 int main(){
     int n, m;
     cin >> n >> m;
-    vector<vector<int>> grid(n, vector<int>(m));
-    int startX, startY;
+    vector<vector<int>> a(n, vector<int>(m));
+    int sx, sy;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
-            cin >> grid[i][j];
-            if(grid[i][j] == 2){
-                startX = i;
-                startY = j;
+            cin >> a[i][j];
+            if(a[i][j] == 2){
+                sx = i;
+                sy = j;
             }
         }
     }
 
     queue<pair<int, int>> q;
-    q.push({startX, startY});
+    q.push({sx, sy});
     
-    vector<vector<int>> dist(n, vector<int>(m, -1));
-    dist[startX][startY] = 0;
+    vector<vector<int>> d(n, vector<int>(m, -1));
+    d[sx][sy] = 0;
 
     int dx[] = {-1, 1, 0, 0};
     int dy[] = {0, 0, -1, 1};
@@ -31,8 +31,8 @@ int main(){
         int x = p.first;
         int y = p.second;
 
-        if(grid[x][y] == 3){
-            cout << "Shortest Path: " << dist[x][y] << endl;
+        if(a[x][y] == 3){
+            cout << "Shortest Path: " << d[x][y] << endl;
             return 0;
         }
 
@@ -41,8 +41,8 @@ int main(){
             int ny = y + dy[i];
 
             if(nx >= 0 && nx < n && ny >= 0 && ny < m){
-                if((grid[nx][ny] == 1 || grid[nx][ny] == 3) && dist[nx][ny] == -1){
-                    dist[nx][ny] = dist[x][y] + 1;
+                if(d[nx][ny] == -1 && (a[nx][ny] == 1 || a[nx][ny] == 3)){
+                    d[nx][ny] = d[x][y] + 1;
                     q.push({nx, ny});
                 }
             }
