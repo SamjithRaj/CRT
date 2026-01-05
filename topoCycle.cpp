@@ -3,15 +3,15 @@
 using namespace std;
 
 int topologicalSort(vector<vector<int>> &graph, int n){
-    vector<int> inDegree(n + 1, 0);
+    vector<int> degree(n + 1, 0);
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= n; j++){
-            if(graph[i][j] == 1) inDegree[j]++;
+            if(graph[i][j] == 1) degree[j]++;
         }
     }
     queue<int> q;
     for(int i = 1; i <= n; i++){
-        if(inDegree[i] == 0) q.push(i);
+        if(degree[i] <= 1) q.push(i);
     }
     int count = 0;
     while(!q.empty()){
@@ -20,8 +20,8 @@ int topologicalSort(vector<vector<int>> &graph, int n){
         count++;
         for(int v = 1; v <= n; v++){
             if(graph[u][v] == 1){
-                inDegree[v]--;
-                if(inDegree[v] == 0) q.push(v);
+                degree[v]--;
+                if(degree[v] == 1) q.push(v);
             }
         }
     }
