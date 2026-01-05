@@ -18,7 +18,7 @@ void printMST(vector<int> &parent, vector<vector<int>> &graph) {
     for (int i = 1; i < graph.size(); i++)
         totalWeight += graph[parent[i]][i];
     cout << "Total Minimum Weight: " << totalWeight << endl;
-}
+}   
 
 void primMST(vector<vector<int>> &graph) {
     int V = graph.size();
@@ -39,7 +39,7 @@ void primMST(vector<vector<int>> &graph) {
         for (int v = 0; v < V; v++)
             if (graph[u][v] && mstSet[v] == false
                 && graph[u][v] < key[v])
-                parent[v] = u, key[v] = graph[u][v];
+                parent  [v] = u, key[v] = graph[u][v];
     }
 
     printMST(parent, graph);
@@ -58,3 +58,28 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+class Solution {
+  public:
+    int spanningTree(int V, vector<vector<int>>& edges) {
+        vector<vector<int>> graph(V, vector<int>(V, 0));
+        for (auto &edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+            graph[u][v] = w;
+            graph[v][u] = w;
+        }
+        primMST(graph);
+        return 0;
+        
+    }
+};
