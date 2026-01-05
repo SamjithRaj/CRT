@@ -18,7 +18,8 @@ public:
 void dfs(int u, map<int, vector<int>> &graph, map<int, bool> &visited, stack<int> &s){
     visited[u] = true;
     for(int v : graph[u]){
-        if(!visited[v]) dfs(v, graph, visited, s);
+        if(!visited[v]) 
+            dfs(v, graph, visited, s);
     }
     s.push(u);
 }
