@@ -5,22 +5,22 @@ int main(){
     int rows, cols;
     cin >> rows >> cols;
     vector<vector<int>> grid(rows, vector<int>(cols));
-    int startX, startY;
+    int X, Y;
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             cin >> grid[i][j];
             if(grid[i][j] == 2){
-                startX = i;
-                startY = j;
+                X = i;
+                Y = j;
             }
         }
     }
 
     queue<pair<int, int>> q;
-    q.push({startX, startY});
+    q.push({X, Y});
     
     vector<vector<int>> distanceMatrix(rows, vector<int>(cols, -1));
-    distanceMatrix[startX][startY] = 0;
+    distanceMatrix[X][Y] = 0;
 
     while(!q.empty()){
         pair<int, int> currentCell = q.front();
