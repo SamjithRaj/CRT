@@ -15,7 +15,7 @@ int find(int i, vector<int> &parent) {
     return parent[i] = find(parent[i], parent);
 }
 
-void union(int u, int v, vector<int> &parent, vector<int> &ranks) {
+void unionSet(int u, int v, vector<int> &parent, vector<int> &ranks) {
     int root_u = find(u, parent);
     int root_v = find(v, parent);
     if (root_u != root_v) {
@@ -47,7 +47,7 @@ int KruskalMST(vector<vector<int>> &graph) {
     for (const auto& edge : edges) {
         if (find(edge.u, parent) != find(edge.v, parent)) {
             totalWeight += edge.weight;
-            union(edge.u, edge.v, parent, ranks);
+            unionSet(edge.u, edge.v, parent, ranks);
         }
     }
     cout << "Total Minimum Weight: " << totalWeight << endl;
