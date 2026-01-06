@@ -6,7 +6,8 @@ int topologicalSort(vector<vector<int>> &graph, int n){
     vector<int> degree(n + 1, 0);
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= n; j++){
-            if(graph[i][j] == 1) degree[j]++;
+            if(graph[i][j] == 1) 
+                degree[j]++;
         }
     }
     queue<int> q;
@@ -26,9 +27,9 @@ int topologicalSort(vector<vector<int>> &graph, int n){
         }
     }
     if(count < n){
-        cout << "Cycle Detected" << endl;
+        cout << "Yes" << endl;
     } else {
-        cout << "No Cycle Detected" << endl;
+        cout << "No" << endl;
     }
     return 0;
 }
