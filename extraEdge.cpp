@@ -1,43 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std; 
 
+int find(int i, vector<int> &parent) {
+    if (parent[i] == i)
+        return i;
+    return parent[i] = find(parent[i], parent);
+}
+
+void unionSet(int u, int v, vector<int> &parent) {
+    int root_u = find(u, parent);
+    int root_v = find(v, parent);
+    if (root_u != root_v) {
+        parent[root_u] = root_v;
+    }
+}
+
 int main(){
     int n, m;
     cin >> n >> m;
-    vector<vector<int>> adj(n);
+    vector<int> parent(n);
+    for(int i = 0; i < n; i++) parent[i] = i;
+
+    int extraEdges = 0;
     for(int i = 0; i < m; i++){
         int u, v;
         cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        if(find(u, parent) == find(v, parent)){
+            extraEdges++;
+        } else {
+            unionSet(u, v, parent);
+        }
     }
 
     int components = 0;
-    int extraEdges = 0;
-    vector<bool> visited(n, false);
-
     for(int i = 0; i < n; i++){
-        if(!visited[i]){
-            components++;
-            queue<int> q;
-            q.push(i);
-            visited[i] = true;
-            int nodeCount = 0;
-            int edgeCount = 0;
-            while(!q.empty()){
-                int u = q.front();
-                q.pop();
-                nodeCount++;
-                for(int v : adj[u]){
-                    edgeCount++;
-                    if(!visited[v]){
-                        visited[v] = true;
-                        q.push(v);
-                    }
-                }
-            }
-            extraEdges += (edgeCount / 2) - (nodeCount - 1);
-        }
+        if(parent[i] == i) components++;
     }
 
     cout << "Extra Edges: " << extraEdges << endl;
