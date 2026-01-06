@@ -7,11 +7,17 @@ int find(int i, vector<int> &parent) {
     return parent[i] = find(parent[i], parent);
 }
 
-void unionSet(int u, int v, vector<int> &parent) {
+void unionSet(int u, int v, vector<int> &parent, vector<int> &size) {
     int root_u = find(u, parent);
     int root_v = find(v, parent);
     if (root_u != root_v) {
-        parent[root_u] = root_v;
+        if (size[root_u] < size[root_v]) {
+            parent[root_u] = root_v;
+            size[root_v] += size[root_u];
+        } else {
+            parent[root_v] = root_u;
+            size[root_u] += size[root_v];
+        }
     }
 }
 
@@ -19,6 +25,7 @@ int main(){
     int n, m;
     cin >> n >> m;
     vector<int> parent(n);
+    vector<int> size(n, 1);
     for(int i = 0; i < n; i++) parent[i] = i;
 
     int extraEdges = 0;
@@ -28,7 +35,7 @@ int main(){
         if(find(u, parent) == find(v, parent)){
             extraEdges++;
         } else {
-            unionSet(u, v, parent);
+            unionSet(u, v, parent, size);
         }
     }
 
