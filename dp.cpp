@@ -2,9 +2,56 @@
 using namespace std;
 
 int main(){
-    vector<pair<int, int>> fib = { {0, 0}, {1,1}, {2,1}, {3,2}, {4,3}, {5,5}, {6,8}, {7,13}, {8,21}, {9,34}};
-    vector<pair<int, int>> prime = { {0,0}, {1,2}, {2,3}, {3,5}, {4,7}, {5,11}, {6,13}, {7,17}, {8,19}, {9,23}};
-    vector<pair<int, int>> fact = { {0,1}, {1,1}, {2,2}, {3,6}, {4,24}, {5,120}, {6,720}, {7,5040}, {8,40320}, {9,362880}};
+    vector<pair<int, int>> fib;
+    vector<pair<int, int>> prime;
+    vector<pair<int, int>> fact;
+
+    for(int i = 0; i<=9; i++){
+
+        int f = 1;
+        for(int j = 1; j <= i; j++){
+            f *= j;
+        }
+        fact.push_back({i, f});
+
+        if(i == 0){
+            prime.push_back({0, 0});
+        } else {
+            int count = 0;
+            for(int num = 2; ; num++){
+                bool isPrime = true;
+                for(int k = 2; k*k <= num; k++){
+                    if(num % k == 0){
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if(isPrime){
+                    count++;
+                    if(count == i){
+                        prime.push_back({i, num});
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(i == 0){
+            fib.push_back({0, 0});
+        } else if(i == 1){
+            fib.push_back({1, 0});
+        } else if(i == 2){
+            fib.push_back({2, 1});
+        } else {
+            int a = 0, b = 1, c;
+            for(int m = 3; m <= i; m++){
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            fib.push_back({i, b});
+        }
+    }
 
     int n; 
     cin >> n; 
