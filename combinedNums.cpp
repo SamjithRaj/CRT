@@ -41,16 +41,16 @@ int nFib(int n){
 
 
 void factorialSumOfDigits(int n) {
-    long long sum = 0;
     for(int i = 0; i < n; i++){
+        long long sum = 0;
         int temp = n;
         if (temp == 0) sum += factorial(0);
         while(temp > 0){
             sum += factorial(temp % 10);
             temp /= 10;
         }
+        cout << "Sum of factorials: " << sum << endl;
     }
-     cout << "Sum of factorials: " << sum << endl;
 }
 
 void primeSumOfDigits(int n) {
