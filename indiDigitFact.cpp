@@ -8,12 +8,15 @@ int factorial(int n){
 
 int main(){
     int n; 
-    cin >> n; 
+    cin >> n;  
+    for(int i = 0; i<n; i++){
+        int x; 
+        cin >> x;
     vector<int> digits;
-    int cnt = log10(n) + 1;
+    int cnt = log10(x) + 1;
     for(int i = 0; i<cnt; i++){
-        digits.push_back(factorial(n % 10));
-        n /= 10;
+        digits.push_back(factorial(x % 10));
+        x /= 10;
     }
 
     int sum = 0; 
