@@ -9,13 +9,13 @@ int isPrime(int n){
     return 1;
 }
 
-int getNthPrime(int k){
-    if(k == 0) return 0;
+int nPrime(int n){
+    if(n == 0) return 0;
     int count = 0;
     for(int i = 2; ; i++){
         if(isPrime(i)){
             count++;
-            if(count == k) return i;
+            if(count == n) return i;
         }
     }
 }
@@ -26,7 +26,7 @@ int main(){
     int sum = 0;
     while(n > 0){
         int digit = n % 10;
-        sum += getNthPrime(digit);
+        sum += nPrime(digit);
         n /= 10;
     }
     cout << sum << endl;
