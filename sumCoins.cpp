@@ -8,8 +8,7 @@ int countSum(vector<int>& ele, int n, int sum) {
     if (sum < 0 || n == 0){
         return 0;
     }
-    return countSum(ele, n, sum - ele[n - 1]) + 
-            countSum(ele, n - 1, sum);
+    return countSum(ele, n, sum - ele[n - 1]) + countSum(ele, n - 1, sum);
 }
 
 int count(vector<int> &ele, int sum) {
@@ -21,4 +20,3 @@ int main() {
     int sum = 4;
     cout << count(ele, sum);
     return 0;
-}
