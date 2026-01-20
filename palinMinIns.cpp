@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int longestPalindromicSubsequence(string s) {
+void longestPalindromicSubsequence(string s) {
     int n = s.length();
-    if (n == 0) return 0;
+    if (n == 0) return;
     vector<vector<int>> dp(n, vector<int>(n));
 
     for (int i = 0; i < n; i++)
@@ -20,12 +20,31 @@ int longestPalindromicSubsequence(string s) {
                 dp[i][j] = max(dp[i][j - 1], dp[i + 1][j]);
         }
     }
-    return dp[0][n - 1];
+
+    string lps = "";
+    int len = dp[0][n - 1];
+    lps.resize(len);
+    int i = 0, j = n - 1;
+    int start = 0, end = len - 1;
+
+    while (i <= j) {
+        if (s[i] == s[j]) {
+            lps[start++] = s[i];
+            lps[end--] = s[j];
+            i++;
+            j--;
+        } else if (dp[i][j - 1] > dp[i + 1][j]) {
+            j--;
+        } else {
+            i++;
+        }
+    }
+    cout << lps << endl;
 }
 
 int main(){
     string s;
     cin >> s;
-    cout << s.length() - longestPalindromicSubsequence(s) << endl;
+    longestPalindromicSubsequence(s);
     return 0;
 }
