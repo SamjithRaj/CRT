@@ -9,7 +9,7 @@ int wildcardMatching(int i, int j, string &s1, string &s2){
         while(i >= 0 && s1[i] == '*'){
             i--;
         }
-        return i < 0 ? 1 : 0;
+        return i < 0 ? true : false;
     }
     if(i < 0){
         return 0;
