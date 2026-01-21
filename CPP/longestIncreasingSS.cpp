@@ -3,26 +3,31 @@ using namespace std;
 
 int longestIncreasingSubsequence(vector<int> &ls){
     int n = ls.size();
-    vector<int> sub; 
     if(n == 0) return 0;
-    sub.push_back(ls[0]);
-    for(int i = 1; i<n; i++){
-        if(ls[i] > sub.back()){
-            sub.push_back(ls[i]);
-        } else {
-            for(int j = 0; j < sub.size(); j++){
-                if(sub[j] >= ls[i]){
-                    sub[j] = ls[i];
-                    break;
+    vector<int> dp(n, 1);
+    vector<long long> count(n, 1);
+    int maxLength = 1;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < i; j++){
+            if(ls[i] > ls[j]){
+                if(dp[j] + 1 > dp[i]){
+                    dp[i] = dp[j] + 1;
+                    count[i] = count[j];
+                } else if(dp[j] + 1 == dp[i]){
+                    count[i] += count[j];
                 }
             }
         }
+        maxLength = max(maxLength, dp[i]);
     }
-    for(auto it : sub){
-        cout << it << " ";
+    long long numberOfLIS = 0;
+    for(int i = 0; i < n; i++){
+        if(dp[i] == maxLength){
+            numberOfLIS += count[i];
+        }
     }
-    cout << endl;
-    return sub.size();
+    cout << numberOfLIS << endl;
+    return maxLength;
 
 }
 
