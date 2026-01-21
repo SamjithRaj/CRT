@@ -10,7 +10,6 @@ int longestIncreasingSubsequence(vector<int> &ls){
         if(ls[i] > sub.back()){
             sub.push_back(ls[i]);
         } else {
-            // Find first element >= ls[i] and replace it
             for(int j = 0; j < sub.size(); j++){
                 if(sub[j] >= ls[i]){
                     sub[j] = ls[i];
