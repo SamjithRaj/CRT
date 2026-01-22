@@ -33,6 +33,21 @@ void findMinPath(int x, int y, int dx, int dy, int dist) {
     findMinPath(x, y - 1, dx, dy, dist + 1);
 }
 
+void findMaxPath(int x, int y, int dx, int dy, int dist) {
+    if (x < 0 || x >= n || y < 0 || y >= m || grid[x][y] == 0) {
+        return;
+    }
+    if (dist <= dp[x][y]) return;
+    dp[x][y] = dist;
+    if (x == dx && y == dy) {
+        return;
+    }
+    findMaxPath(x + 1, y, dx, dy, dist + 1);
+    findMaxPath(x - 1, y, dx, dy, dist + 1);
+    findMaxPath(x, y + 1, dx, dy, dist + 1);
+    findMaxPath(x, y - 1, dx, dy, dist + 1);
+}
+
 int main() {
     cin >> n >> m;
     grid.resize(n, vector<int>(m));
@@ -49,6 +64,7 @@ int main() {
 
     dp.assign(n, vector<int>(m, INT_MAX));
     findMinPath(sx, sy, dx, dy, 0);
+    findMaxPath(sx, sy, dx, dy, 0);
 
     cout << nodes_count << endl;
     if (dp[dx][dy] == INT_MAX) cout << -1 << endl;
