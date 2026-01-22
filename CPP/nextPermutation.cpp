@@ -1,29 +1,31 @@
 #include<bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
-void permute(string s, int left, int right, vector<string>& result) {
-    if (left == right) {
-        result.push_back(s);
-        return;
+bool nextPermutation(string& s){
+    int n = s.length();
+    int i = n - 2;
+    while(i >= 0 && s[i] >= s[i + 1]){
+        i--;
     }
-    
-    for (int i = left; i <= right; i++) {
-        swap(s[left], s[i]);
-        permute(s, left + 1, right, result);
-        swap(s[left], s[i]); 
+    if(i < 0){
+        reverse(s.begin(), s.end());
+        return false;
     }
+    int j = n - 1;
+    while(s[j] <= s[i]){
+        j--;
+    }
+    swap(s[i], s[j]);
+    reverse(s.begin() + i + 1, s.end());
+    return true;
 }
 
-int main() {
-    string s = "abc";
-    vector<string> result;
-    
-    permute(s, 0, s.length() - 1, result);
-    
-    cout << "All permutations of \"" << s << "\":" << endl;
-    for (const string& perm : result) {
-        cout << perm << endl;
-    }
-    
+int main(){
+    string s;
+    cin >> s;
+    sort(s.begin(), s.end());
+    do{
+        cout << s << " ";
+    }while(nextPermutation(s));
     return 0;
 }
