@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 void permute(string s, int left, int right, vector<string>& result) {
@@ -12,7 +10,7 @@ void permute(string s, int left, int right, vector<string>& result) {
     for (int i = left; i <= right; i++) {
         swap(s[left], s[i]);
         permute(s, left + 1, right, result);
-        swap(s[left], s[i]); // backtrack
+        swap(s[left], s[i]); 
     }
 }
 
