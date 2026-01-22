@@ -3,7 +3,7 @@ using namespace std;
 
 int n, m;
 vector<vector<int>> grid;
-int min_dist = INT_MAX;
+vector<vector<int>> dp;
 int nodes_count = 0;
 
 void countSubtree(int x, int y, vector<vector<bool>> &visited) {
@@ -18,20 +18,19 @@ void countSubtree(int x, int y, vector<vector<bool>> &visited) {
     countSubtree(x, y - 1, visited);
 }
 
-void findMinPath(int x, int y, int dx, int dy, int dist, vector<vector<bool>> &visited) {
-    if (x < 0 || x >= n || y < 0 || y >= m || grid[x][y] == 0 || visited[x][y]) {
+void findMinPath(int x, int y, int dx, int dy, int dist) {
+    if (x < 0 || x >= n || y < 0 || y >= m || grid[x][y] == 0) {
         return;
     }
+    if (dist >= dp[x][y]) return;
+    dp[x][y] = dist;
     if (x == dx && y == dy) {
-        min_dist = min(min_dist, dist);
         return;
     }
-    visited[x][y] = true;
-    findMinPath(x + 1, y, dx, dy, dist + 1, visited);
-    findMinPath(x - 1, y, dx, dy, dist + 1, visited);
-    findMinPath(x, y + 1, dx, dy, dist + 1, visited);
-    findMinPath(x, y - 1, dx, dy, dist + 1, visited);
-    visited[x][y] = false;
+    findMinPath(x + 1, y, dx, dy, dist + 1);
+    findMinPath(x - 1, y, dx, dy, dist + 1);
+    findMinPath(x, y + 1, dx, dy, dist + 1);
+    findMinPath(x, y - 1, dx, dy, dist + 1);
 }
 
 int main() {
@@ -48,12 +47,12 @@ int main() {
     vector<vector<bool>> vis1(n, vector<bool>(m, false));
     countSubtree(sx, sy, vis1);
 
-    vector<vector<bool>> vis2(n, vector<bool>(m, false));
-    findMinPath(sx, sy, dx, dy, 0, vis2);
+    dp.assign(n, vector<int>(m, INT_MAX));
+    findMinPath(sx, sy, dx, dy, 0);
 
     cout << nodes_count << endl;
-    if (min_dist == INT_MAX) cout << -1 << endl;
-    else cout << min_dist << endl;
+    if (dp[dx][dy] == INT_MAX) cout << -1 << endl;
+    else cout << dp[dx][dy] << endl;
 
     return 0;
 }
