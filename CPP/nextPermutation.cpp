@@ -29,3 +29,4 @@ int main(){
     }while(nextPermutation(s));
     return 0;
 }
+
